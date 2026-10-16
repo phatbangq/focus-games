@@ -5,12 +5,10 @@ Web app gồm 2 game: Stroop Test (60 giây) và Anti-arrow (60 giây).
 #
 
 ## Thành viên
-| Người | Tên | Phụ trách |
-|---|---|---|
-| A | ... | Khung web, giao diện, deploy, README |
-| B | ... | Module dùng chung, thống kê, biểu đồ |
-| C | ... | Game Stroop |
-| D | ... | Game Anti-arrow |
+1. Nguyễn Minh Tường      | (https://github.com/phatbangq)
+2. Phạm Đình Hải Triều    | (https://github.com/HaiTrieu46)
+3. Nguyễn Minh Niên       | (https://github.com/ngnien1336-cmyk)
+4. Hồ Trương Thái Phương  | (https://github.com/Player102-ChapMotTay) 
 
 ## Cách chạy
 git clone, rồi mở index.html bằng trình duyệt.
