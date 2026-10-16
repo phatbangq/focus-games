@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focus Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="site-header">
+      <span class="brand">Focus Games</span>
+      <button class="btn" id="theme-toggle" type="button">Chế độ tối</button>
+    </header>
+
+    <!-- ===== Trang chủ: menu chọn game ===== -->
+    <main id="menu-screen">
+      <section class="intro">
+        <h1>Rèn luyện sự tập trung</h1>
+        <p>Chọn một game, chơi một ván ngắn và xem mình tập trung thế nào qua từng lượt.</p>
+      </section>
+
+      <ul class="game-list">
+        <li>
+          <button class="game-card" type="button" data-game="stroop">
+            <h2>Stroop Test</h2>
+            <p>Chọn màu của chữ, không phải nghĩa của chữ.</p>
+            <div class="meta">60 giây</div>
+          </button>
+        </li>
+        <li>
+          <button class="game-card" type="button" data-game="antiarrow">
+            <h2>Anti-arrow</h2>
+            <p>Mũi tên chỉ hướng nào, bấm ngược lại hướng đó.</p>
+            <div class="meta">Tăng tốc dần theo cấp</div>
+          </button>
+        </li>
+      </ul>
+    </main>
+
+    <!-- ===== Khung màn chơi chung (trống, chưa có game) ===== -->
+    <section id="game-screen" class="hidden">
+      <div class="game-top">
+        <button class="btn" id="back-btn" type="button">Về menu</button>
+        <div class="stats">
+          <span>Điểm: <strong id="score">0</strong></span>
+          <span>Thời gian: <strong id="timer">00:00</strong></span>
+        </div>
+      </div>
+
+      <div id="progress-bar"><div id="progress-fill"></div></div>
+
+      <div id="game-frame">
+        <div id="stimulus"></div>
+        <p class="controls-hint" id="controls-hint"></p>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // GĐ1: chỉ chuyển giữa menu và khung trống + đổi theme. Chưa có logic game.
+    var GAMES = {
+      stroop:    { name: "Stroop Test", hint: "Phím tắt: 1-4 hoặc R, B, G, Y" },
+      antiarrow: { name: "Anti-arrow",  hint: "Phím mũi tên: bấm ngược hướng" }
+    };
+
+    var menu = document.getElementById("menu-screen");
+    var game = document.getElementById("game-screen");
+    var themeBtn = document.getElementById("theme-toggle");
+
+    function showGame(id) {
+      document.getElementById("controls-hint").textContent = GAMES[id].hint;
+      document.title = GAMES[id].name + " | Focus Games";
+      menu.classList.add("hidden");
+      game.classList.remove("hidden");
+    }
+    function showMenu() {
+      document.title = "Focus Games";
+      game.classList.add("hidden");
+      menu.classList.remove("hidden");
+    }
+
+    document.querySelectorAll(".game-card").forEach(function (card) {
+      card.addEventListener("click", function () { showGame(card.dataset.game); });
+    });
+    document.getElementById("back-btn").addEventListener("click", showMenu);
+
+    function applyTheme(t) {
+      if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      else document.documentElement.removeAttribute("data-theme");
+      themeBtn.textContent = t === "dark" ? "Chế độ sáng" : "Chế độ tối";
+    }
+    themeBtn.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+    });
+  </script>
+</body>
+</html>
